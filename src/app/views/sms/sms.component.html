@@ -1,0 +1,76 @@
+<div class="container mt-3">
+    <div class="row">
+        <!-- Inbox Column -->
+        <div class="col-md-4">
+            <h4>Inbox</h4>
+            <ul class="list-group">
+                <li *ngFor="let message of messages; index as i"
+                    class="list-group-item d-flex justify-content-between align-items-center"
+                    [class.active]="selectedMessage === message" (click)="selectMessage(i)">
+                    <div>
+                        <p><strong>To:</strong> {{ message.to }}</p>
+                        <p><strong>Body:</strong> {{ message.body }}</p>
+                        <p><small><strong>Date Sent:</strong> {{ message.dateSent | date: 'short' }}</small></p>
+                    </div>
+                    <button class="btn btn-danger btn-sm" (click)="deleteMessage(i); $event.stopPropagation()">
+                        delete
+                    </button>
+                </li>
+            </ul>
+            <button class="btn btn-primary mt-3" (click)="fetchMessages()">
+                Refresh Inbox
+            </button>
+            <button class="btn btn-secondary mt-3" (click)="selectedMessage = null">
+                New Message
+            </button>
+        </div>
+
+        <!-- Message Details / Compose New Message -->
+        <div class="col-md-8">
+            <h4 *ngIf="!selectedMessage">New Message</h4>
+            <h4 *ngIf="selectedMessage">Message Details</h4>
+
+            <!-- Compose New Message -->
+            <div *ngIf="!selectedMessage">
+                <div class="form-group mb-3">
+                    <label for="to">To</label>
+                    <input type="text" id="to" class="form-control" [(ngModel)]="newMessage.to"
+                        placeholder="Recipient number" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="body">Message</label>
+                    <textarea id="body" class="form-control" rows="5" [(ngModel)]="newMessage.body"
+                        placeholder="Enter your message"></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="attachment">Attachment</label>
+                    <input type="file" id="attachment" class="form-control" (change)="onFileSelect($event)" />
+                </div>
+                <button class="btn btn-success" (click)="sendMessage()">Send</button>
+            </div>
+
+            <!-- View Message Details -->
+            <div *ngIf="selectedMessage">
+                <p><strong>To:</strong> {{ selectedMessage.to }}</p>
+                <p><strong>From:</strong> {{ selectedMessage.from }}</p>
+                <p><strong>Body:</strong> {{ selectedMessage.body }}</p>
+                <p><strong>Status:</strong> {{ selectedMessage.status }}</p>
+                <p>
+                    <strong>Date Sent:</strong>
+                    {{ selectedMessage.dateSent | date: 'short' }}
+                </p>
+                <!-- Media Section -->
+                <div *ngIf="selectedMessage.attachmentUrl">
+                    <p><strong>Attachments:</strong> {{ selectedMessage.attachmentUrl }}</p>
+                    <img *ngIf="isImage(selectedMessage.attachmentUrl)" [src]="selectedMessage.attachmentUrl"
+                        alt="Attachment" class="img-fluid mb-2" />
+                    <a class="btn btn-primary btn-sm" (click)="downloadAttachment(selectedMessage.attachmentUrl)">
+                        Download Attachment
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

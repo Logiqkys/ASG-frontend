@@ -1,0 +1,37 @@
+<div class="container mt-3">
+    <h2 class="text-center">Chat</h2>
+    <div class="card">
+        <div class="card-header bg-primary text-white">Chat</div>
+        <div class="card-body" style="height: 300px; overflow-y: auto;">
+            <div *ngFor="let msg of messages">
+                <strong [ngClass]="{
+                'text-primary': msg.username === 'admin1',
+                'text-success': msg.username === 'user1'
+              }">
+                    {{ msg.username }}:
+                </strong>
+                <span>{{ msg.message }}</span>
+                <!-- Display attachment if present -->
+                <div *ngIf="msg.attachment">
+                    <!-- Show image preview for .png/.jpg files -->
+                    <img *ngIf="isImage(msg.attachment.filename)" [src]="msg.attachment.url" alt="Image"
+                        class="img-thumbnail mt-2" style="max-width: 200px;" />
+                    <!-- Show download link for other files -->
+                    <a *ngIf="!isImage(msg.attachment.filename)" [href]="msg.attachment.url"
+                        [download]="msg.attachment.filename" class="btn btn-link mt-2">
+                        {{ msg.attachment.filename }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="text" class="form-control mb-2" placeholder="Type a message..." [(ngModel)]="currentMessage"
+                (keyup.enter)="sendMessage()" />
+            <div class="d-flex mb-2">
+                <input type="file" class="form-control me-2" (change)="onFileSelect($event)" />
+                <button class="btn btn-primary" (click)="clearAttachment()">Clear</button>
+            </div>
+            <button class="btn btn-success w-100" (click)="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="voice-container">
+
+    <!-- Dialer -->
+    <div class="dialer">
+        <input type="text" class="phone-input" [(ngModel)]="phoneNumber" placeholder="Enter phone number" readonly />
+        <div class="keypad">
+            <button (click)="addToInput('1')">1</button>
+            <button (click)="addToInput('2')">2</button>
+            <button (click)="addToInput('3')">3</button>
+            <button (click)="addToInput('4')">4</button>
+            <button (click)="addToInput('5')">5</button>
+            <button (click)="addToInput('6')">6</button>
+            <button (click)="addToInput('7')">7</button>
+            <button (click)="addToInput('8')">8</button>
+            <button (click)="addToInput('9')">9</button>
+            <button (click)="addToInput('*')">*</button>
+            <button (click)="addToInput('0')">0</button>
+            <button (click)="addToInput('#')">#</button>
+        </div>
+        <button class="call-button" (click)="makeCall()">📞</button>
+    </div>
+
+    <!-- Incoming Call Popup -->
+    <div *ngIf="incomingCall" class="incoming-call-popup">
+        <p>Incoming call from {{ callerNumber }}</p>
+        <button class="btn btn-success" (click)="acceptCall()">Accept</button>
+        <button class="btn btn-danger" (click)="declineCall()">Decline</button>
+    </div>
+
+    <!-- Call Status -->
+    <p>Status: {{ callStatus }}</p>
+</div>
