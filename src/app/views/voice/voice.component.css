@@ -1,70 +1,106 @@
 .voice-container {
   text-align: center;
-  margin-top: 50px;
-  font-family: Arial, sans-serif;
-}
-
-.voice-container h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.voice-container p {
-  font-size: 16px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .dialer {
   display: inline-block;
-  text-align: center;
-  background: #f0f0f0;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 20px;
 }
 
 .phone-input {
-  width: 100%;
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 20px;
+  width: 200px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 60px);
   gap: 10px;
-  margin-bottom: 20px;
 }
 
-.keypad button {
+button {
+  padding: 10px;
   font-size: 18px;
-  padding: 15px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.keypad button:hover {
-  background-color: #e6e6e6;
 }
 
 .call-button {
-  font-size: 24px;
-  padding: 15px 30px;
-  background-color: #28a745;
-  color: #ffffff;
+  margin-top: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: green;
+  color: white;
   border: none;
   border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 24px;
 }
 
-.call-button:hover {
-  background-color: #218838;
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.popup h3 {
+  margin-bottom: 10px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.popup-actions .btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-actions .btn-success {
+  background-color: green;
+  color: white;
+}
+
+.popup-actions .btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.active-call {
+  margin-top: 20px;
+}
+
+.active-call p {
+  margin: 5px 0;
+}
+
+.active-call .btn-danger {
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

@@ -1,4 +1,5 @@
 <div class="voice-container">
+    <h1>OmniApp - Voice</h1>
 
     <!-- Dialer -->
     <div class="dialer">
@@ -20,11 +21,22 @@
         <button class="call-button" (click)="makeCall()">📞</button>
     </div>
 
-    <!-- Incoming Call Popup -->
-    <div *ngIf="incomingCall" class="incoming-call-popup">
-        <p>Incoming call from {{ callerNumber }}</p>
-        <button class="btn btn-success" (click)="acceptCall()">Accept</button>
-        <button class="btn btn-danger" (click)="declineCall()">Decline</button>
+    <!-- Incoming Call Modal -->
+    <div *ngIf="incomingCall" class="popup-overlay">
+        <div class="popup">
+            <h3>Incoming Call</h3>
+            <p>From: {{ callerNumber }}</p>
+            <div class="popup-actions">
+                <button class="btn btn-success" (click)="acceptCall()">Answer</button>
+                <button class="btn btn-danger" (click)="declineCall()">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Call Information -->
+    <div *ngIf="activeCall && !incomingCall" class="active-call">
+        <p>On Call with: {{ callerNumber }}</p>
+        <button class="btn btn-danger" (click)="endCall()">End Call</button>
     </div>
 
     <!-- Call Status -->
